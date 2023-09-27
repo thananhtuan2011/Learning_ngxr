@@ -4,7 +4,7 @@ import { AuthService } from '../Services/auth.service';
 import { ServicesStudentService } from '../Services/services-student.service';
 import { Store, select } from '@ngrx/store';
 import { getSt, getStudent } from '../core/store/action/student.action';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { currentPostSelector } from '../core/store/selector/student.selector';
 
 @Component({
@@ -34,6 +34,13 @@ export class StudentComponent implements OnInit {
   GetAllStudentStore() {
     this.store.dispatch(getSt());
   }
+  test() {
+    this.store.select(currentPostSelector).pipe(take(1)).subscribe(
+      s => {
+        console.log("bbbbb", s)
+      }
+    );
+  }
   GetAllStuden() {
     this.student_services.GetAllStudent().subscribe((res: any) => {
       console.log("data", res)
@@ -56,9 +63,7 @@ export class StudentComponent implements OnInit {
   ngOnInit(): void {
     // this.GetAllStuden();
     this.GetAllStudentStore();
-    this.count$.subscribe(res => {
-      console.log("ttttt", res)
-    })
+
   }
   logout() {
     this.auth.logout();

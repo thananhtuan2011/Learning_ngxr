@@ -27,12 +27,13 @@ import { FeatureEffects } from './core/store/effect/effect';
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([FeatureEffects]),
     StoreModule.forRoot({}, {}),
     // StoreModule.forRoot({ counter: counterReducer })
     StoreModule.forFeature('feature_student', counterReducer),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]

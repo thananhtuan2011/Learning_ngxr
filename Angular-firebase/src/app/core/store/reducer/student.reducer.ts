@@ -10,7 +10,7 @@ export const initialState: any =
 export const counterReducer = createReducer(
     initialState,
     on(studentAction.getSt, (state) => (
-
+        console.log("tttt", state),
         { ...state }
     ),
 
