@@ -179,5 +179,5 @@ export class SampleDataEffects {
     private actions: Actions,
     public authservice: AuthService,
     private sampledataservice: SampleDataService,
-  ) {}
+  ) { }
 }

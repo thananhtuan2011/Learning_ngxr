@@ -28,6 +28,7 @@
                     Created
                 </button>
 
+                <br>
                 <button style="margin-top: 20px;" (click)="test()">
                     test
                 </button>
@@ -41,6 +42,7 @@
 
                      
                         <tr>
+                            <th scope="col">ID</th>
                             <th scope="col">MaSV</th>
                             <th scope="col">Ten SV</th>
                             <th scope="col">Số môn học</th>
@@ -49,9 +51,10 @@
                     </thead>
                     <thead>
                         <tr *ngFor="let item of count$ | async ">
-
+                            <td>{{item.id}}</td>
                             <td>{{item.MaSV}}</td>
                             <td>{{item.TenSV}}</td>
+                          
                             <td>
                                 <button (click)="Delete(item)" class="btn btn-outline-danger" >Delete</button>
                             </td>

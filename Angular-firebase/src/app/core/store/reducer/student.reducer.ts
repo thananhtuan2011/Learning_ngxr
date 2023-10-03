@@ -10,7 +10,14 @@ export const initialState: any =
 export const counterReducer = createReducer(
     initialState,
     on(studentAction.getSt, (state) => (
-        console.log("tttt", state),
+        { ...state }
+    ),
+
+    ),
+
+
+    on(studentAction.Created, (state, data) => (
+        console.log("Created", data),
         { ...state }
     ),
 
@@ -20,7 +27,12 @@ export const counterReducer = createReducer(
         { ...state, item: props.data }
     )
 
+    ),
+
+    on(studentAction.DataSuccess, (state, props) => (
+        console.log("DataSuccess", props),
+        { ...state, item: props }
     )
 
-
+    )
 );

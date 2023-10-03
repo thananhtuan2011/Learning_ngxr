@@ -3,7 +3,7 @@ import { Student } from '../model/student';
 import { AuthService } from '../Services/auth.service';
 import { ServicesStudentService } from '../Services/services-student.service';
 import { Store, select } from '@ngrx/store';
-import { getSt, getStudent } from '../core/store/action/student.action';
+import { Created, DataSuccess, getSt, getStudent, loadDataSuccess } from '../core/store/action/student.action';
 import { Observable, take } from 'rxjs';
 import { currentPostSelector } from '../core/store/selector/student.selector';
 
@@ -31,30 +31,46 @@ export class StudentComponent implements OnInit {
 
   }
   listStudent: Student[] = [];
+  // getSearchCriteria() {
+  //   return {
+  //     size: this.pageable.pageSize,
+  //     page: this.pageable.pageNumber,
+  //     searchTerms: { ...this.searchTerms },
+  //     sort: (this.pageable.sort = this.sorting),
+  //   };
+  // }
   GetAllStudentStore() {
-    this.store.dispatch(getSt());
+    // this.store.dispatch(getSt());
+    this.store.dispatch(DataSuccess({ httpResponseModel: {} }));
   }
   test() {
-    this.store.select(currentPostSelector).pipe(take(1)).subscribe(
-      s => {
-        console.log("bbbbb", s)
+    // this.store.select(currentPostSelector).pipe(take(1)).subscribe(
+    //   s => {
+    //     console.log("bbbbb", s)
+    //   }
+    // );
+
+    var id = this.student_services.getIdCollection("IeAZKfrd6iZja4hOIhEe").then(
+      res => {
+        console.log("resresres", res)
       }
-    );
+    )
+    console.log("bbbbb", id)
   }
   GetAllStuden() {
-    this.student_services.GetAllStudent().subscribe((res: any) => {
-      console.log("data", res)
-      this.listStudent = res
-      // this.listStudent = res.map((e: any) => {
+    // this.student_services.GetAllStudent().subscribe((res: any) => {
+    //   console.log("data", res)
+    //   this.listStudent = res
+    //   // this.listStudent = res.map((e: any) => {
 
-      //   const data = e.payload.doc.data();
+    //   //   const data = e.payload.doc.data();
 
-      //   data.MaSV = e.payload.doc.id;
-      //   return data;
-      // })
+    //   //   data.MaSV = e.payload.doc.id;
+    //   //   return data;
+    //   // })
 
-      console.log("listStudent", this.listStudent)
-    })
+    //   console.log("listStudent", this.listStudent)
+    // })
 
   }
   Delete(student: Student) {
@@ -69,8 +85,19 @@ export class StudentComponent implements OnInit {
     this.auth.logout();
   }
   addStudent() {
-    this.StudentObj.MaSV = '',
+    this.StudentObj.MaSV = 'ttt',
       this.StudentObj.TenSV = this.TenSV
-    this.student_services.addStudent(this.StudentObj);
+    const payload: Student = {
+      MaSV: "",
+      TenSV: this.TenSV
+    };
+    console.log(" this.payload ", payload)
+
+    // this.store.dispatch(Created({ payload }));
+
+    this.store.dispatch(
+      Created({ payload }),
+    );
+    // this.student_services.addStudent(this.StudentObj);
   }
 }
