@@ -1,3 +1,4 @@
+import { ProductEffects } from './../../core/effect/product.effect';
 import { DeleteEntityDialogComponent } from './../../modules/auth/crud/delete-entity-dialog/delete-entity-dialog.component';
 import { LayoutUtilsService } from './../../modules/auth/crud/utils/layout-utils.service';
 import { CRUDTableModule } from './../../_metronic/shared/crud-table/crud-table.module';
@@ -43,6 +44,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UpdatesanphamcartComponent } from './updatesanphamcart/updatesanphamcart.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { ProductReducer } from 'src/app/core/reducer/product.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -97,7 +102,14 @@ import { MatInputModule } from '@angular/material/input';
     SlickCarouselModule,
     MatDialogModule,
     ReactiveFormsModule,
-    UserRoutingModule
+    UserRoutingModule,
+    EffectsModule.forRoot([]),
+    StoreModule.forRoot({}, {}),
+    StoreModule.forFeature('feature_product', ProductReducer),
+    EffectsModule.forFeature([ProductEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    }),
   ],
   providers: [
     ToastrService,

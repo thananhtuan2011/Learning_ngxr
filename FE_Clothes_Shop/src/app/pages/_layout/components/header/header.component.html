@@ -30,7 +30,7 @@
 
       <!--begin::Header Menu-->
       <!-- Don't change id => 'kt_header_menu' -->
-      <ng-container   *ngIf="User" >
+      <ng-container   *ngIf="User.length>0" >
         <!-- STATIC MENU -->
         <app-header-menu
         *ngIf="User[0].role_code!='1'"

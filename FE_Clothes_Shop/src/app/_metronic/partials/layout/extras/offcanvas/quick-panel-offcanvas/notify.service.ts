@@ -19,7 +19,7 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class NotifyService {
-    hubUrl = 'https://localhost:44327' + '/hubs';
+    hubUrl = 'https://localhost:5001' + '/hubs';
     private hubConnection: HubConnection;
     private onlineUsersSource = new BehaviorSubject<any[]>([]);
     onlineUsers$ = this.onlineUsersSource.asObservable();
